@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+
+long long int dp[30002];
+
+void setDpValue()
+{
+    for(int i=0; i <= 30000; i++) dp[i]=1;
+    for(int i=5; i <= 30000; i++) dp[i]=dp[i]+dp[i-5];
+    for(int i=10; i <= 30000; i++) dp[i]=dp[i]+dp[i-10];
+    for(int i=25; i <= 30000; i++) dp[i]=dp[i]+dp[i-25];
+    for(int i=50; i <= 30000; i++) dp[i]=dp[i]+dp[i-50];
+}
+
+int main()
+{
+    int n;
+   
+    setDpValue();
+    while(cin>>n)
+    {
+        if(dp[n]==1) cout<<"There is only 1 way to produce "<<n<<" cents change."<<endl;
+        else cout<<"There are "<<dp[n]<<" ways to produce "<<n<<" cents change."<<endl;
+    }
+
+    return 0;
+}
