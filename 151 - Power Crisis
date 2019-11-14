@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+
+using namespace std;
+
+int f[102];
+
+int main()
+{
+    while(true)
+    {
+        int n;
+       
+        cin>>n;
+        if(n==0) break;
+       
+        for(int i=1;;i++)
+        {
+            memset(f,0,sizeof(f));
+           
+            int t1=i, c=0;
+           
+            for(int j=1;j<=n;j++)
+            {
+                if(j==13&&t1==i) break;
+                if(f[j]==0&&t1==i)
+                {
+                    f[j]=1;
+                    t1=1;
+                    c++;
+                }
+                else if(f[j]==0) t1++;
+               
+                if(j==n) j=1;
+            }
+            if(c==n-1)
+            {
+                cout<<i<<endl;
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
