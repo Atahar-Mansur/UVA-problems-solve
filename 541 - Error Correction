@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+int main()
+{
+    for(;;)
+    {
+        int n, sn, mat[102][102], f=0, ff=0, x, y;
+       
+        cin>>n;
+       
+        if(n==0) break;
+       
+        for(int i=1; i<=n ; i++)
+        {
+            int rc=0;
+            for(int j=1; j<=n ; j++)
+            {
+                cin>>sn;
+                rc+=sn;
+                mat[i][j]=sn;
+            }
+            if(rc%2==1 && f==0)
+            {
+                f=1;
+                x=i;
+            }
+            else if(rc%2==1 && f==1) f=2;
+        }
+       
+        for(int i=1; i<=n ; i++)
+        {
+            int cc=0;
+            for(int j=1; j<=n ; j++) cc+=mat[j][i];
+            if(cc%2==1 && ff==0)
+            {
+                ff=1;
+                y=i;
+            }
+            else if(cc%2==1 && ff==1) ff=2;
+        }
+       
+        if(f==0&&ff==0) cout<<"OK"<<endl;
+        else if (f==1&&ff==1) cout<<"Change bit ("<<x<<","<<y<<")"<<endl;
+        else cout<<"Corrupt"<<endl;
+               
+    }
+    return 0;
+}
