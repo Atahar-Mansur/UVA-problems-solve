@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int main()
+{
+    for(;;)
+    {
+        int n, c[1002];
+       
+        cin>>n;
+        if(n==0) break;
+       
+        for(;;)
+        {
+            stack<int> st;
+           
+            cin>>c[0];
+            if(c[0]==0)
+            {
+                cout<<endl;
+                break;
+            }
+            else for(int i=1;i<n;i++) cin>>c[i];
+           
+            for(int i=1, j=0;i<=n;i++)
+            {
+               st.push(i);
+               while(!st.empty()&&st.top()==c[j])
+               {
+                   st.pop();
+                   j++;
+               }
+            }
+           
+            if(st.empty()) cout<<"Yes"<<endl;
+            else cout<<"No"<<endl;
+        }
+    }
+
+    return 0;
+}
