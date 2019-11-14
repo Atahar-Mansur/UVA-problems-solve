@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+int main()
+{
+    int n;
+    while(cin>>n)
+    {
+        int r, m=0;
+        for(r=1;;r++)
+        {
+            m=m*10+1;
+            if(m%n==0) break;
+            else m%=n;
+        }
+        cout<<r<<endl;
+    }
+
+    return 0;
+}
