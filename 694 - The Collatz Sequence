@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main()
+{
+    int T = 1;
+    for(;;T++)
+    {
+        long long int ini, limV, n, r;
+        scanf("%lld%lld", &ini, &limV);
+       
+        if(ini < 0 && limV < 0) break;
+       
+        n=ini;
+        for(r=1;;r++)
+        {
+            if(n%2==0) n/=2;
+            else n = n * 3 + 1;
+            if(n==1||n>limV) break;
+        }
+        if(n==1) r++;
+        printf("Case %d: A = %lld, limit = %lld, number of terms = %lld\n", T, ini, limV, r);
+    }
+
+    return 0;
+}
