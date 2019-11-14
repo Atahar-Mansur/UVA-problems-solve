@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+#include <string.h>
+
+using namespace std;
+
+int prime[10000];
+bool f[32770];
+
+void detPrime()
+{
+    int t1=1;
+    prime[0]=2;
+    for(int i=3;i<32768;i+=2)
+    {
+        if(!f[i])
+        {
+           prime[t1] = i;
+           t1++;
+           
+           for(int j=i+i;j<=32768; j+=i) f[j] = true;
+        }
+    }
+    prime[t1] = 35000;
+}
+
+int main()
+{
+    detPrime();
+    
+    for(;;)
+    {
+        int n, r=0, l;
+        cin>>n;
+        if(n==0) break;
+        
+        for(l=0;prime[l]<=n;l++);
+        for(int i=0;prime[i]<=n/2;i++)
+        {
+            for(int j=l-1;prime[j]>=n/2;j--)
+            {
+                if(prime[i]+prime[j]==n)
+                {
+                    r++;
+                    break;
+                }
+            }
+        }
+        cout<<r<<endl;
+    }
+
+    return 0;
+}
