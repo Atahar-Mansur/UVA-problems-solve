@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+int main()
+{
+    string str[102];
+    string s;
+    int i=0, hs=0, l;
+    while(getline(cin, s))
+    {
+        l=s.length();
+        if(l>hs) hs=l;
+        str[i]=s;
+        i++;
+    }
+    for(int t1=0;t1<hs;t1++)
+    {
+        for(int t2=i-1;t2>=0;t2--)
+        {
+            if(str[t2].length()>t1) cout<<str[t2][t1];
+            else cout<<" ";
+        }
+        cout<<endl;
+    }
+    return 0;
+}
