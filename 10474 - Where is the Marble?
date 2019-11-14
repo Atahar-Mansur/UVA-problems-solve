@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int marbleNo[10001];
+
+int main()
+{
+    int T = 1;
+    for(;;T++)
+    {
+        int m, q, mn, qn, r=0;
+        scanf("%d%d", &m, &q);
+       
+        if(m==0 && q==0) break;
+        else printf("CASE# %d:\n", T);
+       
+        for(int i=0;i<m;i++)
+        {
+            scanf("%d", &mn);
+            marbleNo[mn]++;
+        }
+        for(int i=0;i<q;i++)
+        {
+            scanf("%d", &qn);
+            if(marbleNo[qn]==0) printf("%d not found\n", qn);
+            else
+            {
+                for(int j=0;j<qn;j++) r+=marbleNo[j];
+                printf("%d found at %d\n", qn, r+1);
+            }
+            r=0;
+        }
+        for(int i=0;i<=10000;i++) marbleNo[i]=0;
+    }
+
+    return 0;
+}
