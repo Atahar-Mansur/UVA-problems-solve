@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#include<string.h>
+
+using namespace std;
+
+int dp[22][22];
+
+int main()
+{
+    int n, input, real[21], ans[21];
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>input;
+        real[input-1]=i;
+    }
+   
+    while(cin>>input)
+    {
+        ans[input-1]=0;
+        for(int i=1;i<n;i++)
+        {
+            cin>>input;
+            ans[input-1]=i;
+        }
+       
+        memset(dp, 0, sizeof(dp));
+       
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(real[j-1]==ans[i-1]) dp[i][j]=dp[i-1][j-1]+1;
+                else
+                {
+                    if(dp[i][j-1]>dp[i-1][j]) dp[i][j]=dp[i][j-1];
+                    else dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+       
+       cout<<dp[n][n]<<endl;
+    }
+    return 0;
+}
