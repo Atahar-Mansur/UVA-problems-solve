@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+#include <string.h>
+
+using namespace std;
+
+int sortStc[32];
+int stc[32];
+
+void bubbleSort(int n)
+{
+    for(int i=n;i>0;i--)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            if(sortStc[j]<sortStc[j-1])
+            {
+                int s = sortStc[j];
+                sortStc[j] = sortStc[j-1];
+                sortStc[j-1] = s;
+            }
+        }
+    }
+}
+
+void turn(int n, int m)
+{
+    n=m-n+1;
+    for(int i=0;i<=n/2;i++)
+    {
+        int s = stc[i];
+        stc[i] = stc[n-i];
+        stc[n-i] = s;
+    }
+}
+
+int find(int n, int l)
+{
+    for(int i=l, j=1;i>=0;i--, j++) 
+        if(stc[i]==n) 
+            return j;
+}
+
+int main()
+{
+    string input;
+    
+    while(getline(cin,input))
+    {
+        int i, j, k;
+        
+        memset(stc, 0, sizeof(stc));
+        for(i=0, j=0;i<input.size();i++)
+        {
+            if(input[i]==' ') j++;
+            else stc[j] = (stc[j]*10) + (input[i]-'0');
+        }
+        for(i=0;i<=j;i++)
+        {
+            sortStc[i]=stc[i];
+            cout<<stc[i]<<" ";
+        }
+        cout<<endl;
+        
+        bubbleSort(j);
+        
+        for(i=j, k=1;i>=0;i--,k++)
+        {
+            if(i==0) cout<<'0'<<endl;
+            else if(stc[i]!=sortStc[i])
+            {
+                if(stc[0]==sortStc[i])
+                {
+                    cout<<k<<' ';
+                    turn(k, j);
+                }
+                else
+                {
+                    int r = find(sortStc[i], j);
+                    cout<< r << ' ';
+                    turn(r, j);
+                    cout<<k<<' ';
+                    turn(k, j);
+                }
+            }
+        }
+    }
+
+    return 0;
+}
