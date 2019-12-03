@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+#include <string.h>
+
+using namespace std;
+
+long int dp1[10000001], dp2[10000001];
+
+void assignDPvalues()
+{
+    bool f=true;
+    for(int i=1, j=1;i<=10000000;j++)
+    {
+        if(f)
+        {
+            f=false;
+            for(int k=1;k<=j;k++)
+            {
+                dp1[i]=k;
+                dp2[i]=j-k+1;
+                i++;
+                if(i>10000000) break;
+            }
+        }
+        else
+        {
+            f=true;
+            for(int k=1;k<=j;k++)
+            {
+                dp2[i]=k;
+                dp1[i]=j-k+1;
+                i++;
+                if(i>10000000) break;
+            }
+        }
+    }
+}
+
+int main()
+{
+    assignDPvalues();
+    long int n;
+    
+    while(cin>>n) cout<<"TERM "<<n<<" IS "<<dp2[n]<<"/"<<dp1[n]<<endl;
+    
+    return 0;
+}
